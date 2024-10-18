@@ -1,9 +1,50 @@
-import kagglehub
+import pandas as pd
 
-# Download latest version
-path = kagglehub.dataset_download("calebpool/spotifys-top-100-streamed-songs-as-of-21623")
+info = open("Spotify_Top_100_Songs_21623.csv", "r")
+linjer = info.readlines()
+oversikt = {}
+i = 0
 
-print("Path to dataset files:", path)
+for linje in linjer:
+    linje = linje.split(",")
+    sang = linje[3]
+    sang = sang[6:-6] 
+    oversikt[i] = sang
+    i +=1   
 
-x = 1
-test
+
+
+def velg_sang():
+    sang = sanger[random.randint(0, len(sanger)-1)] 
+    sanger.remove(sang)
+    return sang
+()
+ 
+score = 0
+ 
+def spill(sang1, sang2):
+    global score
+    print("hvilken har mest streams?")
+    print(sang1["tittel"] + " eller " + sang2["tittel"] + "?")
+    svar = "blank"
+    while  svar != sang1["tittel"] and svar != sang2["tittel"]:
+        svar = str(input("svar: "))
+    if sang1["streams"] > sang2["streams"]:
+        fasit = sang1
+    else:
+        fasit = sang2
+ 
+    if svar == fasit["tittel"]:
+        sang1 = fasit
+        print("riktg!")
+        print("")
+        score +=1
+        if len(sanger) > 0:
+            spill(fasit, velg_sang())
+        else:
+            print("du vant")
+    else:
+        print("feil!")
+        print("din score ble ", score)
+ 
+spill(velg_sang(), velg_sang())
