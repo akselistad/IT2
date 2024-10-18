@@ -1,2 +1,9 @@
+import kagglehub
+
+# Download latest version
+path = kagglehub.dataset_download("calebpool/spotifys-top-100-streamed-songs-as-of-21623")
+
+print("Path to dataset files:", path)
+
 x = 1
 test
