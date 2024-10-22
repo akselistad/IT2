@@ -5,42 +5,43 @@ info = open("Spotify_Top_100_Songs_21623.csv", "r")
 linjer = info.readlines()
 sanger = {}
 i = 0
-brukte_sanger = []
+aktuell_sang = ""
+
+
 
 for linje in linjer:
     linje = linje.split(",")
     sang_datasett = linje[3]
     sang_datasett = sang_datasett[6:-6] 
     sanger[i] = sang_datasett
-    i +=1   
+    i +=1  
     
-print(sanger)
 del sanger[0]
 
 
 
 def velg_sang():
-    tilfeldig_tall = random.randint(0,len(sanger)-1)
-    sang = sanger.get(tilfeldig_tall)
-    del sanger[tilfeldig_tall]
-    return sang
-print(velg_sang())
+    ranking = random.randint(0,len(sanger)-1)
+    aktuell_sang = sanger.get(ranking)
+    del sanger[ranking]  
+    return aktuell_sang, ranking
+
  
 score = 0
  
 def spill(sang1, sang2):
     global score
     print("Hvilken har mest streams?")
-    print(sang1["tittel"] + " eller " + sang2["tittel"] + "?")
+    print(sang1[0] + " eller "+ sang2[0] + "?")
     svar = "blank"
-    while  svar != sang1["tittel"] and svar != sang2["tittel"]:
+    while  svar != sang1[0] and svar != sang2[0]:
         svar = str(input("svar: "))
-    if sang1["streams"] > sang2["streams"]:
+    if sang1[1] > sang2[1]:
         fasit = sang1
     else:
         fasit = sang2
  
-    if svar == fasit["tittel"]:
+    if svar == fasit[0]:
         sang1 = fasit
         print("riktg!")
         print("")
@@ -51,7 +52,7 @@ def spill(sang1, sang2):
             print("du vant")
     else:
         print("feil!")
-        print("din score ble ", score)
+        print("din score ble", score)
  
 spill(velg_sang(), velg_sang())
 
