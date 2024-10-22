@@ -1,30 +1,36 @@
 import pandas as pd
+import random
 
 info = open("Spotify_Top_100_Songs_21623.csv", "r")
 linjer = info.readlines()
-oversikt = {}
+sanger = {}
 i = 0
+brukte_sanger = []
 
 for linje in linjer:
     linje = linje.split(",")
-    sang = linje[3]
-    sang = sang[6:-6] 
-    oversikt[i] = sang
+    sang_datasett = linje[3]
+    sang_datasett = sang_datasett[6:-6] 
+    sanger[i] = sang_datasett
     i +=1   
+    
+print(sanger)
+del sanger[0]
 
 
 
 def velg_sang():
-    sang = sanger[random.randint(0, len(sanger)-1)] 
-    sanger.remove(sang)
+    tilfeldig_tall = random.randint(0,len(sanger)-1)
+    sang = sanger.get(tilfeldig_tall)
+    del sanger[tilfeldig_tall]
     return sang
-()
+print(velg_sang())
  
 score = 0
  
 def spill(sang1, sang2):
     global score
-    print("hvilken har mest streams?")
+    print("Hvilken har mest streams?")
     print(sang1["tittel"] + " eller " + sang2["tittel"] + "?")
     svar = "blank"
     while  svar != sang1["tittel"] and svar != sang2["tittel"]:
@@ -48,3 +54,7 @@ def spill(sang1, sang2):
         print("din score ble ", score)
  
 spill(velg_sang(), velg_sang())
+
+
+
+
