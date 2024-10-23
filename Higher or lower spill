@@ -1,7 +1,7 @@
 import pandas as pd
 import random
 
-info = open("Spotify_Top_100_Songs_21623.csv", "r")
+info = open("Spotify_Top_100_Songs_21623.csv", encoding="UTF-8")
 linjer = info.readlines()
 sanger = {}
 i = 0
@@ -36,7 +36,7 @@ def spill(sang1, sang2):
     svar = "blank"
     while  svar != sang1[0] and svar != sang2[0]:
         svar = str(input("svar: "))
-    if sang1[1] > sang2[1]:
+    if sang1[1] < sang2[1]:
         fasit = sang1
     else:
         fasit = sang2
@@ -47,7 +47,7 @@ def spill(sang1, sang2):
         print("")
         score +=1
         if len(sanger) > 0:
-            spill(fasit, velg_sang())
+            spill(sang2, velg_sang())
         else:
             print("du vant")
     else:
